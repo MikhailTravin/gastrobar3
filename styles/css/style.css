@@ -58,8 +58,8 @@ img {
 @font-face {
     font-family: geometria;
     font-display: swap;
-    src: url("../fonts/geometria-extrabold.woff2") format("woff2"),
-        url("../fonts/geometria-extrabold.woff") format("woff");
+    src: url("../../../fonts/geometria-extrabold.woff2") format("woff2"),
+        url("../../fonts/geometria-extrabold.woff") format("woff");
     font-weight: 800;
     font-style: normal;
 }
@@ -67,56 +67,52 @@ img {
 @font-face {
     font-family: geometria;
     font-display: swap;
-    src: url("../fonts/geometria-bold.woff2") format("woff2"),
-        url("../fonts/geometria-bold.woff") format("woff");
+    src: url("../../fonts/geometria-bold.woff2") format("woff2"),
+        url("../../fonts/geometria-bold.woff") format("woff");
     font-weight: 700;
     font-style: normal;
 }
-
 @font-face {
     font-family: geometria;
     font-display: swap;
-    src: url("../fonts/geometria-bolditalic.woff2") format("woff2"),
-        url("../fonts/geometria-bolditalic.woff") format("woff");
+    src: url("../../fonts/geometria-bolditalic.woff2") format("woff2"),
+        url("../../fonts/geometria-bolditalic.woff") format("woff");
     font-weight: 700;
     font-style: italic;
 }
-
 @font-face {
     font-family: geometria;
     font-display: swap;
-    src: url("../fonts/geometria-light.woff2") format("woff2"),
-        url("../fonts/geometria-light.woff") format("woff");
+    src: url("../../fonts/geometria-light.woff2") format("woff2"),
+        url("../../fonts/geometria-light.woff") format("woff");
     font-weight: 300;
     font-style: normal;
 }
-
 @font-face {
     font-family: geometria;
     font-display: swap;
-    src: url("../fonts/geometria-medium.woff2") format("woff2"),
-        url("../fonts/geometria-medium.woff") format("woff");
+    src: url("../../fonts/geometria-medium.woff2") format("woff2"),
+        url("../../fonts/geometria-medium.woff") format("woff");
     font-weight: 500;
     font-style: normal;
 }
-
 @font-face {
     font-family: geometria;
     font-display: swap;
-    src: url("../fonts/geometria-mediumitalic.woff2") format("woff2"),
-        url("../fonts/geometria-mediumitalic.woff") format("woff");
+    src: url("../../fonts/geometria-mediumitalic.woff2") format("woff2"),
+        url("../../fonts/geometria-mediumitalic.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: geometria;
+    font-display: swap;
+    src: url("../../fonts/geometria-lightitalic.woff2") format("woff2"),
+        url("../../fonts/geometria-lightitalic.woff") format("woff");
     font-weight: 400;
     font-style: normal;
 }
 
-@font-face {
-    font-family: geometria;
-    font-display: swap;
-    src: url("../fonts/geometria-lightitalic.woff2") format("woff2"),
-        url("../fonts/geometria-lightitalic.woff") format("woff");
-    font-weight: 400;
-    font-style: normal;
-}
 
 :root {
     --white: #fff;
@@ -214,7 +210,7 @@ body {
 }
 
 .page {
-    padding-bottom: 50vh;
+    padding-bottom: 50vh !important;
 }
 
 .wrapper {
@@ -683,7 +679,7 @@ body {
     background-color: #1c1c1c;
     color: var(--white);
     width: 100%;
-    height: 110px;
+    height: 150px;
     padding: 35px;
     font-size: 24px;
     border-radius: 30px;
@@ -763,7 +759,7 @@ body {
 }
 
 .order__column .quantity input {
-    font-size: 20px;
+    font-size: 30px;
 }
 
 .order__column .quantity__button {
@@ -1164,7 +1160,7 @@ body {
 }
 
 .header {
-    padding: 150px 0px 76px 0px;
+    padding: 50px 0px 76px 0px;
 }
 
 .header__logo {
@@ -1335,10 +1331,10 @@ body {
 }
 
 .lang-header__body ul li {
+    font-family: "geometria", sans-serif;
     font-size: 32px;
     color: var(--white);
     font-weight: 500;
-    font-family: "Geometria";
     text-align: right;
 }
 
@@ -1370,7 +1366,7 @@ body {
 
 @media (max-width: 1000px){
     .footer{
-        padding: 5vw 7dvw;
+        padding: 5vw;
     }
 }
 
@@ -1468,8 +1464,11 @@ body {
 @media (max-width: 1000px){
     .footer__container {
         padding: 0px;
-        margin: 0px 7dvw 0px 0px;
     } 
+}
+
+.popup-show .footer__container {
+    margin: 0px 5dvw 0px 0px;
 }
 
 .popup-thanks-order .top-footer.footer-thanks-order {
@@ -1477,6 +1476,7 @@ body {
 }
 
 .top-footer.footer-thanks-order .top-footer__header {
+    margin-bottom: 0px;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
@@ -1493,7 +1493,6 @@ body {
 
 .top-footer.footer-thanks-order .top-footer__title {
     text-align: center;
-    margin: 0 0 5.56vh 0;
 }
 
 .top-footer__header {
@@ -1544,6 +1543,12 @@ body {
     min-width: auto;
 }
 
+@media (max-width: 500px){
+    .top-footer__button {
+        border-radius: 2vw; 
+    }
+}
+
 .top-footer__button span {
     display: block;
 }
@@ -1576,6 +1581,12 @@ body {
     border-radius: 4vw;
     padding: 0.463vh 3.906vw;
     min-width: auto;
+}
+
+@media (max-width: 500px){
+    .top-footer__button-black{
+    border-radius: 2vw;
+    } 
 }
 
 .navigation {
@@ -1846,4 +1857,13 @@ body {
     font-size: 18px;
     margin: 0px 0px 0px 14px;
     font-weight: 400;
+}
+
+
+.navigation--fixed._fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translateZ(0); /* Оптимизация для фиксированного позиционирования */
 }

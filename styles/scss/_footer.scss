@@ -14,7 +14,7 @@
         box-shadow: 0px -20px 14px 0px rgba(0, 0, 0, 0.749);
     }
     @media (max-width: 1000px) {
-        padding: 5vw 7dvw;
+        padding: 5vw;
     }
     // .footer__container
 
@@ -24,7 +24,9 @@
         max-width: 100%;
         @media (max-width: 1000px) {
             padding: 0px;
-            margin: 0px 7dvw 0px 0px;
+        }
+        .popup-show & {
+            margin: 0px 5dvw 0px 0px;
         }
     }
 
@@ -99,6 +101,7 @@
         .top-footer__header {
             flex-direction: column;
             align-items: center;
+            margin-bottom: 0px;
             img {
                 width: 7vw;
                 height: 7vw;
@@ -106,7 +109,6 @@
         }
         .top-footer__title {
             text-align: center;
-            margin: 0 0 5.56vh 0;
         }
     }
     // .top-footer__header

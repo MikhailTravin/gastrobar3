@@ -24,7 +24,7 @@
 		}
 
 		#scale-wrapper {
-			--scale-padding: 80px;
+			/*--scale-padding: 80px;*/
 			transform-origin: top left;
 			width: 1000px;
 			padding: 0 var(--scale-padding);
@@ -39,6 +39,7 @@
 		}
 
 		@media (max-width: 1000px) {
+
 			body,
 			html {
 				overflow-x: hidden !important;
@@ -101,7 +102,7 @@
 			</div>
 		</header>
 		<main class="page">
-			<div class="navigation">
+			<div class="navigation navigation--fixed">
 				<div class="navigation__container">
 					<div class="navigation__body">
 						<div class="navigation__content">

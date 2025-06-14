@@ -1,5 +1,5 @@
 .header {
-    padding: 150px 0px 76px 0px;
+    padding: 50px 0px 76px 0px;
     // .header__container
 
     &__container {
@@ -151,6 +151,8 @@
                 color: var(--white);
                 font-weight: 500;
                 text-align: right;
+                font-family: serif;
+                font-family: "geometria", sans-serif;
             }
         }
     }
