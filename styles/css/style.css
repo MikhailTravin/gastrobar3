@@ -1363,9 +1363,15 @@ body {
     width: 100%;
     z-index: 110;
     border-radius: 30px 30px 0px 0px;
-    padding: 5vw 7dvw;
+    padding: 57px 0px 35px 0px;
     box-sizing: border-box;
     padding-right: 0;
+}
+
+@media (max-width: 1000px){
+    .footer{
+        padding: 5vw 7dvw;
+    }
 }
 
 .popup-show .footer {
@@ -1455,7 +1461,15 @@ body {
 
 .footer__container {
     padding: 0px;
-    margin: 0px 7dvw 0px 0px;
+    margin: 0px;
+    max-width: 100%;
+}
+
+@media (max-width: 1000px){
+    .footer__container {
+        padding: 0px;
+        margin: 0px 7dvw 0px 0px;
+    } 
 }
 
 .popup-thanks-order .top-footer.footer-thanks-order {
