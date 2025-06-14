@@ -443,6 +443,7 @@ function updatePopupHeight() {
 window.addEventListener('resize', updatePopupHeight);
 window.addEventListener('DOMContentLoaded', updatePopupHeight);
 
+// Обработчик кликов по кнопкам навигации
 document.querySelectorAll("[data-goto]").forEach(button => {
     button.addEventListener("click", e => {
         e.preventDefault();
@@ -457,34 +458,88 @@ document.querySelectorAll("[data-goto]").forEach(button => {
             console.error("Блок не найден:", target);
         }
 
-        // Синхронизируем все кнопки с таким же data-goto
-        const allButtonsWithSameTarget = document.querySelectorAll(`[data-goto="${target}"]`);
+        // Обновляем активное состояние кнопок
+        updateActiveNavigation(target);
+    });
+});
 
-        // Удаляем старый активный класс у всех кнопок во всех навигациях
-        document.querySelectorAll("[data-goto]._navigator-active").forEach(btn => {
-            btn.classList.remove("_navigator-active");
-        });
+// Функция обновления активного состояния навигации
+function updateActiveNavigation(target) {
+    // Синхронизируем все кнопки с таким же data-goto
+    const allButtonsWithSameTarget = document.querySelectorAll(`[data-goto="${target}"]`);
 
-        // Добавляем новый активный класс всем подходящим кнопкам
-        allButtonsWithSameTarget.forEach(navButton => {
-            navButton.classList.add("_navigator-active");
+    // Удаляем старый активный класс у всех кнопок во всех навигациях
+    document.querySelectorAll("[data-goto]._navigator-active").forEach(btn => {
+        btn.classList.remove("_navigator-active");
+    });
 
-            // Прокручиваем .navigation__body к активной кнопке
-            const navigationBody = navButton.closest('.navigation__body');
-            if (navigationBody) {
-                const containerWidth = navigationBody.clientWidth;
-                const buttonPosition = navButton.offsetLeft;
-                const buttonWidth = navButton.offsetWidth;
+    // Добавляем новый активный класс всем подходящим кнопкам
+    allButtonsWithSameTarget.forEach(navButton => {
+        navButton.classList.add("_navigator-active");
 
-                const scrollLeft = buttonPosition - (containerWidth / 2) + (buttonWidth / 2);
+        // Прокручиваем .navigation__body к активной кнопке
+        const navigationBody = navButton.closest('.navigation__body');
+        if (navigationBody) {
+            const containerWidth = navigationBody.clientWidth;
+            const buttonPosition = navButton.offsetLeft;
+            const buttonWidth = navButton.offsetWidth;
 
-                navigationBody.scrollTo({
-                    left: scrollLeft,
-                    behavior: 'smooth'
-                });
+            const scrollLeft = buttonPosition - (containerWidth / 2) + (buttonWidth / 2);
+
+            navigationBody.scrollTo({
+                left: scrollLeft,
+                behavior: 'smooth'
+            });
+        }
+    });
+}
+
+// Инициализация IntersectionObserver для отслеживания видимости секций
+function initSectionObserver() {
+    const sections = document.querySelectorAll('[data-watch="navigator"]');
+    
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5 // Срабатывает, когда видно 50% элемента
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Получаем класс секции (например "popular" из класса "products popular")
+                const sectionClass = Array.from(entry.target.classList)
+                    .find(className => className !== 'products' && className !== 'reveal-on-scroll');
+                
+                if (sectionClass) {
+                    // Обновляем активное состояние навигации
+                    updateActiveNavigation(`.${sectionClass}`);
+                }
             }
         });
+    }, observerOptions);
+
+    // Начинаем наблюдение за всеми секциями
+    sections.forEach(section => {
+        observer.observe(section);
     });
+}
+
+// Инициализируем при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+    initSectionObserver();
+    
+    // Если в URL есть хэш, прокручиваем к соответствующей секции
+    if (window.location.hash) {
+        const target = window.location.hash;
+        const element = document.querySelector(target);
+        if (element) {
+            setTimeout(() => {
+                element.scrollIntoView({ behavior: "smooth" });
+                updateActiveNavigation(target);
+            }, 100);
+        }
+    }
 });
 
 
