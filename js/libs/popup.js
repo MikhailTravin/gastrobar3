@@ -11,7 +11,7 @@ function indents() {
         let height = window.getComputedStyle(footerTop).height;
         hfooterTop = Number(height.replace("px", ""));
     }
-    if (page) page.style.paddingBottom = `${hFooter - hfooterTop}px`;
+    if (page) page.style.paddingBottom = `${hFooter}px`;
     if (popups.length) popups.forEach((popup => {
         popup.style.paddingBottom = `${hFooter}px`;
     }));

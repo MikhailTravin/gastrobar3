@@ -285,6 +285,7 @@
     }
     .popup__content {
         padding: 0px 0px 20px 0px;
+        padding-bottom: 80vh !important;
     }
     // .card-product-block__image
 
@@ -459,7 +460,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        font-size: 6.96vh;
+        font-size: 3.96vh;
         color: var(--black);
         font-weight: 700;
         text-align: center;
