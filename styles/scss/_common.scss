@@ -459,16 +459,16 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        font-size: 32px;
+        font-size: 6.96vh;
         color: var(--black);
         font-weight: 700;
         text-align: center;
         max-width: 483px;
         border-radius: 40px;
-        padding: 40px 35px 25px 35px;
+        padding: 3.7vh 3.24vh 2.31vh 3.24vh;
         img {
-            width: 116px;
-            height: 116px;
+            width: 20.74vh;
+            height: 20.74vh;
             margin: 0px 0px 25px 0px;
         }
         span {
@@ -540,7 +540,7 @@
     &__line {
         width: 4px;
         background-color: #222222;
-        height: calc(100% - 10.70vh);
+        height: calc(100% - 10.7vh);
         margin: 0px 40px;
     }
 }

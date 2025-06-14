@@ -206,7 +206,7 @@ body {
 }
 
 .page {
-    padding-bottom: 50vh !important;
+    /*padding-bottom: 50vh !important;*/
 }
 
 .wrapper {
@@ -1040,18 +1040,18 @@ body {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    font-size: 32px;
+    font-size: 6.96vh;
     color: var(--black);
     font-weight: 700;
     text-align: center;
     max-width: 483px;
     border-radius: 40px;
-    padding: 40px 35px 25px 35px;
+    padding: 5.08vw 6.82vw 5.30vw 6.82vw;
 }
 
 .popup-button__content img {
-    width: 116px;
-    height: 116px;
+    width: 20.74vh;
+    height: 20.74vh;
     margin: 0px 0px 25px 0px;
 }
 

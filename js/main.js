@@ -157,31 +157,51 @@ if (langButton) {
         }));
     }));
 }
-document.addEventListener("click", (function (e) {
+document.addEventListener("click", function (e) {
+    const popupText = document.querySelector('.popup-button span'); // Добавили определение
+    if (!popupText) {
+        console.error("Элемент popupText не найден");
+        return;
+    }
+
     const addBasket = e.target.closest(".add-basket");
     if (!addBasket) return;
+
     const card = addBasket.closest(".footer-product-card");
     if (!card) return;
+
     const button = card.querySelector(".top-footer__button");
     const quantityInput = card.querySelector("[data-quantity-value]");
+
     const isActive = button?.classList.contains("_active");
-    popupText.textContent = isActive ? "Удалено из заказа" : "Добавлено в заказ";
+
+    popupText.textContent = "Добавлено в заказ"; // Теперь работает
+
     if (button) {
         button.classList.toggle("_active", !isActive);
         if (quantityInput) quantityInput.value = 1;
     }
+
     const showBasket = card.querySelector(".show-basket");
     if (showBasket) {
         addBasket.style.display = isActive ? "inline" : "none";
         showBasket.style.display = isActive ? "none" : "inline";
     }
+
+    const addPopup = document.getElementById('add'); // Убедитесь, что addPopup определён
+    if (!addPopup) {
+        console.error("Элемент addPopup не найден");
+        return;
+    }
+
     addPopup.classList.add("popup_show");
     addPopup.setAttribute("aria-hidden", "false");
-    setTimeout((() => {
+
+    setTimeout(() => {
         addPopup.classList.remove("popup_show");
         addPopup.setAttribute("aria-hidden", "true");
-    }), 2e3);
-}));
+    }, 2000);
+});
 class HorizontalDragScroll {
     constructor(selector, options = {}) {
         this.containers = document.querySelectorAll(selector);
@@ -497,7 +517,7 @@ function updateActiveNavigation(target) {
 // Инициализация IntersectionObserver для отслеживания видимости секций
 function initSectionObserver() {
     const sections = document.querySelectorAll('[data-watch="navigator"]');
-    
+
     const observerOptions = {
         root: null,
         rootMargin: '0px',
@@ -510,7 +530,7 @@ function initSectionObserver() {
                 // Получаем класс секции (например "popular" из класса "products popular")
                 const sectionClass = Array.from(entry.target.classList)
                     .find(className => className !== 'products' && className !== 'reveal-on-scroll');
-                
+
                 if (sectionClass) {
                     // Обновляем активное состояние навигации
                     updateActiveNavigation(`.${sectionClass}`);
@@ -528,7 +548,7 @@ function initSectionObserver() {
 // Инициализируем при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
     initSectionObserver();
-    
+
     // Если в URL есть хэш, прокручиваем к соответствующей секции
     if (window.location.hash) {
         const target = window.location.hash;
