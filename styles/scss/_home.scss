@@ -1,8 +1,4 @@
 .navigation {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-
     // .navigation__container
 
     &__container {
@@ -20,6 +16,8 @@
     // .navigation__body
 
     &__body {
+        margin: 0px -55px;
+        padding: 0px 55px;
         border-radius: 30px;
         position: relative;
         overflow: auto;
@@ -61,6 +59,31 @@
     }
 }
 
+.navigation--fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.navigation--fixed .navigation__title {
+    padding: 2.13vh 4.86vw;
+    font-size: 3.3vw;
+}
+
+.navigation--fixed .navigation__container {
+    padding: 0px 1.5625rem;
+}
+
+.navigation--fixed.fixed {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 .page {
     display: flex;
     flex-direction: column;
@@ -82,9 +105,8 @@
         &.scroll {
             display: flex;
             flex-wrap: nowrap;
-            margin: 0px -25px;
-            padding: 0px 25px;
-            width: calc(100% + 50px);
+            margin: 0px -55px;
+            padding: 0px 55px;
             overflow: auto;
             -ms-overflow-style: none;
             scrollbar-width: none;
@@ -189,7 +211,7 @@
     // .card-product__subtitle
 
     &__subtitle {
-        font-size: 18px;
+        font-size: 22px;
         margin: 0px 0px 25px 0px;
         font-weight: 400;
     }

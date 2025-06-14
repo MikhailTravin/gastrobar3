@@ -415,11 +415,8 @@ function updateScale() {
         wrapper.style.marginBottom = '0';
     }
 }
-
 updateScale();
-
 window.addEventListener('resize', updateScale);
-
 function updatePopupHeight() {
     const popup = document.querySelector('.vh100');
     if (!popup) return;
@@ -453,63 +450,66 @@ document.querySelectorAll("[data-goto]").forEach(button => {
         const target = button.getAttribute("data-goto");
         const element = document.querySelector(target);
 
-        // Удаляем класс _navigator-active у всех кнопок
-        document.querySelectorAll("[data-goto]._navigator-active").forEach(btn => {
-            btn.classList.remove("_navigator-active");
-        });
-
-        // Добавляем класс активной кнопке
-        button.classList.add("_navigator-active");
-
-        // Прокрутка к блоку
+        // Прокрутка к секции
         if (element) {
             element.scrollIntoView({ behavior: "smooth", block: "start" });
         } else {
             console.error("Блок не найден:", target);
         }
+
+        // Синхронизируем все кнопки с таким же data-goto
+        const allButtonsWithSameTarget = document.querySelectorAll(`[data-goto="${target}"]`);
+
+        // Удаляем старый активный класс у всех кнопок во всех навигациях
+        document.querySelectorAll("[data-goto]._navigator-active").forEach(btn => {
+            btn.classList.remove("_navigator-active");
+        });
+
+        // Добавляем новый активный класс всем подходящим кнопкам
+        allButtonsWithSameTarget.forEach(navButton => {
+            navButton.classList.add("_navigator-active");
+
+            // Прокручиваем .navigation__body к активной кнопке
+            const navigationBody = navButton.closest('.navigation__body');
+            if (navigationBody) {
+                const containerWidth = navigationBody.clientWidth;
+                const buttonPosition = navButton.offsetLeft;
+                const buttonWidth = navButton.offsetWidth;
+
+                const scrollLeft = buttonPosition - (containerWidth / 2) + (buttonWidth / 2);
+
+                navigationBody.scrollTo({
+                    left: scrollLeft,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
 });
 
+
 document.addEventListener("DOMContentLoaded", function () {
-    const navFixed = document.querySelector('.navigation--fixed');
+    const nav = document.querySelector(".navigation.navigation--fixed");
+    const header = document.querySelector(".header");
 
-    if (!navFixed) {
-        console.error("Не найден .navigation--fixed");
-        return;
-    }
+    if (!nav || !header) return;
 
-    let originalPositionTop = 0;
 
-    function updateNavOffset() {
-        const rect = navFixed.getBoundingClientRect();
-        const wrapper = document.getElementById('scale-wrapper');
-        let scale = 1;
-
-        if (wrapper) {
-            const style = window.getComputedStyle(wrapper);
-            const transform = style.transform || '';
-            if (transform && transform !== 'none') {
-                const match = transform.match(/matrix$([^)]+)$/);
-                if (match) {
-                    scale = parseFloat(match[1].split(', ')[0]);
-                }
+    // Используем IntersectionObserver для отслеживания видимости заголовка
+    const observer = new IntersectionObserver(
+        ([entry]) => {
+            if (!entry.isIntersecting) {
+                nav.classList.add("fixed");
+            } else {
+                nav.classList.remove("fixed");
             }
+        },
+        {
+            rootMargin: "0px",
+            threshold: 0,
         }
+    );
 
-        // Учитываем масштабирование
-        originalPositionTop = rect.top / scale + window.scrollY;
-        console.log("Позиция меню с учетом масштаба:", originalPositionTop);
-    }
-
-    updateNavOffset(); // Вызываем один раз при загрузке
-    window.addEventListener('resize', updateNavOffset);
-
-    window.addEventListener('scroll', () => {
-        const scrollTop = window.scrollY;
-        if (scrollTop >= originalPositionTop) {
-            navFixed.classList.add('_fixed');
-        } else {
-            navFixed.classList.remove('_fixed');
-        }
-    });
+    // Начинаем отслеживать header
+    observer.observe(header);
 });

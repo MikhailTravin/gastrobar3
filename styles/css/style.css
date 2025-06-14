@@ -43,10 +43,6 @@ img {
         transform: scale(0.9);
     }
 
-    .navigation {
-        top: 15px !important;
-    }
-
     .navigation__content {
         border: 1px solid #00000060;
         transform: scale(0.99);
@@ -1327,7 +1323,7 @@ body {
     -ms-flex-direction: column;
     flex-direction: column;
     gap: 35px;
-    padding: 33px 25px 30px 10px;
+    padding: 33px 25px 30px 25px;
 }
 
 .lang-header__body ul li {
@@ -1612,6 +1608,8 @@ body {
     -ms-overflow-style: none;
     scrollbar-width: none;
     border-radius: 30px;
+    margin: 0px -55px;
+    padding: 0px 55px;
 }
 
 .navigation__body::-webkit-scrollbar {
@@ -1682,9 +1680,8 @@ body {
     display: flex;
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
-    margin: 0px -25px;
-    padding: 0px 25px;
-    width: calc(100% + 50px);
+    margin: 0px -55px;
+    padding: 0px 55px;
     overflow: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -1811,7 +1808,7 @@ body {
 }
 
 .card-product__subtitle {
-    font-size: 18px;
+    font-size: 22px;
     margin: 0px 0px 25px 0px;
     font-weight: 400;
 }
@@ -1859,11 +1856,27 @@ body {
     font-weight: 400;
 }
 
+.navigation--fixed {
+ position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
 
-.navigation--fixed._fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    transform: translateZ(0); /* Оптимизация для фиксированного позиционирования */
+.navigation--fixed .navigation__title{
+    padding: 2.13vh 4.86vw;
+    font-size: 3.3vw;
+}
+
+.navigation--fixed .navigation__container{
+    padding: 0px 1.5625rem;
+}
+
+.navigation--fixed.fixed {
+   opacity: 1;
+  pointer-events: auto;
 }
